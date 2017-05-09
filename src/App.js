@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-class HamccoApp extends Component {
+class HamApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,27 +10,51 @@ class HamccoApp extends Component {
     };
   }
   render() {
-    return {
-      <div className="Hamcco">
+    return (
+      <div>
+        <h3>はむっこボディー部</h3>
+        <dl><dt>feel</dt><dd>{this.state.feel}</dd></dl>
+        <dl><dt>count</dt><dd>{this.state.count}</dd></dl>
+
+      {/* <div className="Hamcco">
         <HamccoImage feel={this.state.feel} />
         <HamccoMessage message="あああああ" />
         <HamccoLevel feel={this.state.feel} />
       </div>
       <div className="HamChat">
         <HamccoChat onSubmit={() => this.chatHamcco()} />
+      </div> */}
+
       </div>
-    };
+    );
   }
 }
 
+class HamHeader extends Component {
+  render() {
+    return (
+      <header>
+        <h1>人口無能ハムッ子であそぼう</h1>
+      </header>
+    );
+  }
+}
+class HamFooter extends Component {
+  render() {
+    return (
+      <footer>
+        フッターですわ。
+      </footer>
+    );
+  }
+}
 class App extends Component {
-
   render() {
     return (
       <div className="App">
-        <Hamheader />
-        <HamccoApp />
-        <Hamfooter />
+        <HamHeader />
+        <HamApp />
+        <HamFooter />
       </div>
     );
   }
