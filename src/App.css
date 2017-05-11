@@ -18,6 +18,34 @@
   font-size: large;
 }
 
+.hamcco-container {
+  max-width: 80%;
+  margin: auto;
+  padding: 20px;
+  background-color: #dddddd;
+}
+.hamcco-grid {
+  margin: 10px;
+  padding: 10px ;
+  display: -webkit-flex;
+  display: flex;
+  list-style: none;
+  background-color: #eeeeee;
+}
+.hamcco-cell {
+  margin: 10px;
+  padding: 0px;
+  border-radius: 5px;
+  line-height: 1;
+  color: #000;
+  background-color: #6699cc;
+  flex: 1;
+}
+.image {
+  flex: 2;
+}
+
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

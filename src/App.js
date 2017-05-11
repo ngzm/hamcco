@@ -11,10 +11,22 @@ class HamApp extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="hamcco-container">
         <h3>はむっこボディー部</h3>
-        <dl><dt>feel</dt><dd>{this.state.feel}</dd></dl>
-        <dl><dt>count</dt><dd>{this.state.count}</dd></dl>
+        <div className="hamcco-grid">
+          <div className="hamcco-cell image">
+            ハムっこのアニメーションイメージ
+          </div>
+          <div className="hamcco-cell">
+            ふきだし
+          </div>
+        </div>
+        <div className="hamcco-grid">
+          <div className="hamcco-cell">
+            <dl><dt>feel</dt><dd>{this.state.feel}</dd></dl>
+            <dl><dt>count</dt><dd>{this.state.count}</dd></dl>
+          </div>
+        </div>
 
       {/* <div className="Hamcco">
         <HamccoImage feel={this.state.feel} />
