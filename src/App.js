@@ -1,6 +1,38 @@
 import React, { Component } from 'react';
 import './App.css';
 
+class HamccoImage extends Component {
+  render() {
+    return (
+      <div className={`hamcco-cell ${this.props.flex}`}>
+        <h4>はむっこイメージ</h4>
+        feel: {this.props.feel} / {`hamcco-cell ${this.props.flex}`}
+      </div>
+    );
+  }
+}
+class HamccoMessage extends Component {
+  render() {
+    return (
+      <div className={`hamcco-cell ${this.props.flex}`}>
+        <h4>はむっこメッセージ</h4>
+        message: {this.props.message}
+      </div>
+    );
+  }
+}
+class HamccoLevel extends Component {
+  render() {
+    return (
+      <div className="hamcco-cell">
+        Level: {this.props.level}
+      </div>
+    );
+  }
+}
+
+
+
 class HamApp extends Component {
   constructor(props) {
     super(props);
@@ -11,21 +43,13 @@ class HamApp extends Component {
   }
   render() {
     return (
-      <div className="hamcco-container">
-        <h3>はむっこボディー部</h3>
+      <main className="hamcco-container">
         <div className="hamcco-grid">
-          <div className="hamcco-cell image">
-            ハムっこのアニメーションイメージ
-          </div>
-          <div className="hamcco-cell">
-            ふきだし
-          </div>
+          <HamccoImage feel={this.state.feel} flex="flex7" />
+          <HamccoMessage message="あああああ" flex="flex5"/>
         </div>
         <div className="hamcco-grid">
-          <div className="hamcco-cell">
-            <dl><dt>feel</dt><dd>{this.state.feel}</dd></dl>
-            <dl><dt>count</dt><dd>{this.state.count}</dd></dl>
-          </div>
+          <HamccoLevel level={this.state.feel} />
         </div>
 
       {/* <div className="Hamcco">
@@ -37,7 +61,7 @@ class HamApp extends Component {
         <HamccoChat onSubmit={() => this.chatHamcco()} />
       </div> */}
 
-      </div>
+      </main>
     );
   }
 }
