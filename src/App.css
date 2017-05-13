@@ -19,26 +19,25 @@
 }
 
 .hamcco-container {
-  max-width: 80%;
+  width: 80%;
+  max-width: 800px;
   margin: auto;
-  padding: 20px;
-  background-color: #dddddd;
+  padding: 0px;
+  background-color: #6699CC;
 }
 .hamcco-grid {
-  margin: 10px;
-  padding: 10px ;
+  margin: 0px;
+  padding: 4px ;
   display: -webkit-flex;
   display: flex;
   list-style: none;
   background-color: #eeeeee;
 }
 .hamcco-cell {
-  margin: 10px;
-  padding: 0px;
-  border-radius: 5px;
-  line-height: 1;
+  margin: 0 auto;
+  padding: 10px;
   color: #000;
-  background-color: #6699cc;
+  background-color: #FFFFFF;
   flex: 1;
 }
 .flex1 { flex: 1; }
@@ -53,6 +52,33 @@
 .flex10 { flex: 10; }
 .flex11 { flex: 11; }
 .flex12 { flex: 12; }
+
+.hamcco-cell meter {
+  width : 75%;
+  margin: 0 0 0 10px;
+}
+
+.ham-message {
+  box-sizing: border-box;
+  height: 75%;
+  margin: 40px 20px 20px 20px;
+  padding: 20px 10px;
+  border-radius: 20px;
+  color: #FFFFFF;
+  background-color: #6699CC;
+  position: relative;
+}
+.ham-message:after {
+  border: 40px solid transparent;
+  border-right-color: #6699CC;
+  border-left-width: 0;
+  left: -40px;
+  content: "";
+  display: block;
+  top: 80px;
+  position: absolute;
+  width: 0;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
