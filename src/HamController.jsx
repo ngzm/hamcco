@@ -13,25 +13,22 @@ class HamController extends Component {
     this.state = {
       feel: 80,
       message: 'こんにちは、なにか話しかけてね！',
-      count: 0
+      count: 0,
     };
   }
 
   sendMessage(message) {
-    console.log('say message: ' + message);
+    console.log(`say message: ${message}`);
 
     Axios.get('/hamcco.json').then((res) => {
+      console.log(`status : ${res.status}`);
+      console.log(`data : ${JSON.stringify(res.data)}`);
 
-      console.log('status : ' + res.status);
-      console.log('data : ' + JSON.stringify(res.data));
-
-      this.setState(() => {
-        return { 
-          count: this.state.count + 1,
-          feel: res.data.feel,
-          message : res.data.message
-        };
-      });
+      this.setState(() => ({
+        count: this.state.count + 1,
+        feel: res.data.feel,
+        message: res.data.message,
+      }));
     }).catch((res) => {
       console.log(res);
     });
@@ -41,7 +38,7 @@ class HamController extends Component {
     return (
       <main>
         <Hamcco feel={this.state.feel} message={this.state.message} />
-        <Hamtalk onSubmit={(m) => this.sendMessage(m)} />
+        <Hamtalk onSubmit={m => this.sendMessage(m)} />
         <Hamguide />
       </main>
     );
