@@ -4,7 +4,7 @@ module.exports = {
     "commonjs": true,
     "es6": true
   },
-  "extends": "eslint:recommended",
+  "extends": "airbnb",
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
@@ -18,6 +18,7 @@ module.exports = {
   "rules": {
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
+    "no-console": "off",
     "indent": [
       "error",
       2

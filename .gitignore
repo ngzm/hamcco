@@ -1,18 +1,16 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
+# App
+/app/public
+/log
 
-# dependencies
-/node_modules
+# bundler
+/vendor
+.bundle
 
-# testing
-/coverage
-
-# production
-/build
+# ruby
+.rbenv-version
+.rvmrc
 
 # misc
 .DS_Store
 .env
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 

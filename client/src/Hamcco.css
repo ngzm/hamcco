@@ -1,0 +1,61 @@
+.hamcco-container {
+  width: 80%;
+  max-width: 800px;
+  min-width: 400px;
+  margin: 10px auto 10px auto;
+  padding: 10px 10px 20px 10px;
+  color: #000000;
+  background-color: #FFFFFF;
+}
+.hamcco-grid {
+  margin: 0;
+  padding: 0;
+  display: -webkit-flex;
+  display: flex;
+  list-style: none;
+}
+.hamcco-cell {
+  margin: 0 auto;
+  padding: 10px;
+  flex: 1;
+}
+.flex1 { flex: 1; }
+.flex2 { flex: 2; }
+.flex3 { flex: 3; }
+.flex4 { flex: 4; }
+.flex5 { flex: 5; }
+.flex6 { flex: 6; }
+.flex7 { flex: 7; }
+.flex8 { flex: 8; }
+.flex9 { flex: 9; }
+.flex10 { flex: 10; }
+.flex11 { flex: 11; }
+.flex12 { flex: 12; }
+
+.hamcco-cell meter {
+  width : 70%;
+  margin: 0 0 0 10px;
+}
+
+.hamcco-message {
+  box-sizing: border-box;
+  height: 240px;
+  margin: 40px 20px 20px 20px;
+  padding: 20px 10px;
+  border-radius: 20px;
+  color: #FFFFFF;
+  background-color: #66CC99;
+  position: relative;
+}
+.hamcco-message:after {
+  border: 40px solid transparent;
+  border-right-color: #66CC99;
+  border-left-width: 0;
+  left: -40px;
+  content: "";
+  display: block;
+  top: 80px;
+  position: absolute;
+  width: 0;
+}
+
