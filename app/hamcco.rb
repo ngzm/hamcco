@@ -6,8 +6,8 @@ require 'faraday'
 # HamccoTalk Class
 #
 class HamccoTalk < Sinatra::Base
-  APPKEY = 'your-app-key'.freeze
-  URL = 'https://your-url'.freeze
+  APPKEY = 'your-api-key'.freeze
+  URL = 'https://chat-url'.freeze
 
   post '/hamcco/talk' do
     body = request.body.read
