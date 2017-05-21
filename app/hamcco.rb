@@ -6,9 +6,7 @@ require 'hamccoexception.rb'
 ## Debug Print Flag
 DEBUG = true
 
-#
 # HamccoTalk Class
-#
 class HamccoTalk < Sinatra::Base
   post '/hamcco/talk' do
     begin
@@ -25,23 +23,23 @@ class HamccoTalk < Sinatra::Base
       # Reply message
       generate_response(reply, parms[:feel])
     rescue BadRequestException => e
-      puts 'BadRequestException!!!' if DEBUG
-      p e if DEBUG
+      p "BadRequestException!!! #{e}" if DEBUG
       status 400
       e.message
     rescue UserlocalApiException => e
-      puts 'RuntimeExcetption!!!' if DEBUG
-      p e if DEBUG
+      p "UserlocalException!!! #{e}" if DEBUG
       status 500
       e.message
     rescue => e
-      puts 'RuntimeExcetption!!!' if DEBUG
-      p e if DEBUG
+      p "RuntimeException!!! #{e}" if DEBUG
       status 500
       e.message
     end
   end
 
+  private
+
+  # Parsing the request body JSON data.
   def parse_request(request)
     body = request.body.read
     raise BadRequestException 'Bad Request' if body == ''
@@ -52,6 +50,7 @@ class HamccoTalk < Sinatra::Base
     { message: args['message'], feel: args['feel'] }
   end
 
+  # Create response data JSON String.
   def generate_response(message, feel)
     JSON.generate('message' => message, 'feel' => feel)
   end
