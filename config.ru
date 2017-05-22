@@ -1,4 +1,4 @@
 $LOAD_PATH.push('./app')
 
-require 'hamcco.rb'
-run HamccoTalk
+require 'ham_controller.rb'
+run HamController

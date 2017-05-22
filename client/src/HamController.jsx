@@ -20,9 +20,9 @@ class HamController extends Component {
   sendMessage(message) {
     console.log(`say message: ${message}`);
 
-    Axios.post('/hamcco/talk', {
+    Axios.post('/hamcco/chat', {
       count: this.state.count,
-      feel: this.state.count,
+      feel: this.state.feel,
       message,
     }).then((res) => {
       console.log(`status : ${res.status}`);

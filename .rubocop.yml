@@ -1,0 +1,15 @@
+# Allow japanese comments
+AsciiComments:
+  Enabled: false
+
+# Lamda
+Lambda:
+  Enabled: false
+
+# Max line length
+Metrics/LineLength:
+  Max: 110
+  AllowURI: true
+  URISchemes:
+    - http
+    - https

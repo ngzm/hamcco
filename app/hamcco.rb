@@ -1,57 +1,59 @@
-require 'sinatra/base'
-require 'json'
-require 'userlocal.rb'
-require 'hamccoexception.rb'
+require 'singleton'
 
-## Debug Print Flag
-DEBUG = true
+require 'dic1_handler'
+require 'dic2_handler'
+require 'dic3_handler'
 
-# HamccoTalk Class
-class HamccoTalk < Sinatra::Base
-  post '/hamcco/talk' do
-    begin
-      # Parse request parameters
-      parms = parse_request(request)
+#
+# Hamcco chat dictionary generator
+#
+class Hamcco
+  # Initializer
+  def initialize
+    super
+    @dic1_handler = Dic1Handler.new
+    @dic2_handler = Dic2Handler.new(@dic1_handler.dic)
+    @dic3_handler = Dic3Handler.new(@dic1_handler.dic)
+  end
 
-      # Use UserLocal API
-      userlocal = UserLocal.new
-      reply = userlocal.chat(parms[:message])
+  # set myname
+  def myname=(myname)
+    @dic2_handler.myname = myname
+    @dic3_handler.myname = myname
+  end
 
-      ## not so useful character
-      ## reply = userlocal.character(reply) if rand(10) > 7
+  # set username
+  def usrname=(usrname)
+    @dic2_handler.usrname = usrname
+    @dic3_handler.usrname = usrname
+  end
 
-      # Reply message
-      generate_response(reply, parms[:feel])
-    rescue BadRequestException => e
-      p "BadRequestException!!! #{e}" if DEBUG
-      status 400
-      e.message
-    rescue UserlocalApiException => e
-      p "UserlocalException!!! #{e}" if DEBUG
-      status 500
-      e.message
-    rescue => e
-      p "RuntimeException!!! #{e}" if DEBUG
-      status 500
-      e.message
+  # chat with hamcco
+  def chat(lev, message)
+    reply = @dic2_handler.reply(lev, message)
+    unless reply
+      reply = rand(1..10).odd? ? @dic3_handler.reply(lev) : nil
     end
+    reply
   end
+end
 
-  private
+#
+# Factory singleton hamcco instance
+#
+class HamccoFactory
+  include Singleton
 
-  # Parsing the request body JSON data.
-  def parse_request(request)
-    body = request.body.read
-    raise BadRequestException 'Bad Request' if body == ''
+  attr_accessor :hamcco
 
-    args = JSON.parse(body)
-    p "args = #{args}" if DEBUG
+  def initialize
+    super
+    @hamcco = Hamcco.new
 
-    { message: args['message'], feel: args['feel'] }
-  end
-
-  # Create response data JSON String.
-  def generate_response(message, feel)
-    JSON.generate('message' => message, 'feel' => feel)
+    ## こっからはデバッグ用
+    return unless DEBUG
+    puts '---------------------------'
+    puts 'Initialize Hamcco Instance'
+    puts '---------------------------'
   end
 end
