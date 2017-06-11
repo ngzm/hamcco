@@ -1,21 +1,17 @@
-.hamtalk-container {
-  width: 80%;
-  max-width: 800px;
-  min-width: 400px;
-  margin: 10px auto 10px auto;
+.login-panel {
+  margin: 20px auto;
   padding: 20px 10px;
-  color: #000000;
-  background-color: #CCEEFF;
+  color: #FFCC66;
 }
 
-.hamtalk-container input {
-  width: 70%;
+.login-panel input {
+  width: 300px;
   color: #0066CC;
   font-size: 1em;
   margin: 0 8px;
 }
 
-.hamtalk-container button {
+.login-panel button {
   width: 100px;
   color: #FFFFFF;
   font-size: 1em;
@@ -25,10 +21,10 @@
   border-radius: 3px;
   box-shadow: 2px 2px 2px rgba(90,60,30,1);
 }
-.hamtalk-container button:active {
+.login-panel button:active {
   background-color: #DD9966;
   box-shadow: 1px 1px 1px rgba(255,180,120,1);
 }
-.hamtalk-container button:focus {
+.login-panel button:focus {
   outline: none;
 }

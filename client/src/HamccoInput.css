@@ -1,0 +1,34 @@
+.hamcco-input {
+  width: 80%;
+  max-width: 800px;
+  min-width: 400px;
+  margin: 10px auto 10px auto;
+  padding: 20px 10px;
+  color: #000000;
+  background-color: #CCEEFF;
+}
+
+.hamcco-input input {
+  width: 70%;
+  color: #0066CC;
+  font-size: 1em;
+  margin: 0 8px;
+}
+
+.hamcco-input button {
+  width: 100px;
+  color: #FFFFFF;
+  font-size: 1em;
+  text-decoration: none;
+  background-color: #CC6633;
+  border-style: none;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px rgba(90,60,30,1);
+}
+.hamcco-input button:active {
+  background-color: #DD9966;
+  box-shadow: 1px 1px 1px rgba(255,180,120,1);
+}
+.hamcco-input button:focus {
+  outline: none;
+}

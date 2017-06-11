@@ -38,6 +38,13 @@ class HamController < Sinatra::Base
     generate_response(output)
   end
 
+  # For Hamcco Client App
+  ['/', '/chat'].each do |route|
+    get route do
+      send_file File.join(settings.public_folder, 'index.html')
+    end
+  end
+
   # Error handlers
   error BadRequestException do
     e = env['sinatra.error']

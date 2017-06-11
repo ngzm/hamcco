@@ -1,9 +1,9 @@
 import React from 'react';
-import './Hamguide.css';
+import './HamccoGuide.css';
 
-function Hamguide() {
+function HamccoGuide() {
   return (
-    <aside className="hamguide-container">
+    <aside className="hamcco-guide">
       <section>
         <h2>あそびかた</h2>
         <ul>
@@ -35,4 +35,4 @@ function Hamguide() {
   );
 }
 
-export default Hamguide;
+export default HamccoGuide;
