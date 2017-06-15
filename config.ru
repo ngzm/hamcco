@@ -1,2 +1,4 @@
-require './app/test.rb'
-run Sinatra::Application
+$LOAD_PATH.push('./app')
+
+require 'ham_controller.rb'
+run HamController

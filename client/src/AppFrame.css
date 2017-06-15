@@ -1,0 +1,16 @@
+.AppFrame {
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #336699;
+}
+
+header {
+  padding: 5px;
+  color: white;
+}
+
+footer {
+  padding: 5px;
+  color: white;
+}

@@ -1,6 +1,7 @@
 # App
 /app/public
 /log
+/userlocal.env
 
 # bundler
 /vendor
@@ -13,4 +14,3 @@
 # misc
 .DS_Store
 .env
-
