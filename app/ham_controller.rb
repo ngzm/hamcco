@@ -24,13 +24,14 @@ class HamController < Sinatra::Base
 
   before '/hamcco/chat' do
     content_type :json
-    before_hamcco('ハムっこ', 'なおき')
   end
 
   # Request Handlers
   post '/hamcco/chat' do
     input = parse_request_body(request.body)
-    puts "[input] feel: #{input[:feel]}, message: #{input[:message]}"
+    puts "[input] usrname: #{input[:usrname]} feel: #{input[:feel]} message: #{input[:message]}"
+
+    set_names('ハムっこ', input[:usrname])
 
     output = chat_with_hamcco(input) || chat_with_userlocal(input)
     puts "[output] feel: #{output[:feel]}, ham_message: #{output[:message]}"

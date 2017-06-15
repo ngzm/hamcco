@@ -20,7 +20,7 @@ module Sinatra
       raise BadRequestException, 'Bad Request' if payload_string == ''
 
       payload = JSON.parse(payload_string)
-      { message: payload['message'], feel: payload['feel'] }
+      { usrname: payload['usrname'], message: payload['message'], feel: payload['feel'] }
     end
 
     # Create response data JSON String.
@@ -34,7 +34,7 @@ module Sinatra
   #
   module ChatHelper
     # Initializing hamcco instance and loading chat dictionaries
-    def before_hamcco(hamname = 'ハムっこ', usrname = 'たろう')
+    def set_names(hamname = 'ハムっこ', usrname = 'たろう')
       @hamcco = HamccoFactory.instance.hamcco
       @hamcco.myname = hamname
       @hamcco.usrname = usrname
