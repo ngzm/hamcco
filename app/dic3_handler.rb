@@ -33,7 +33,7 @@ class Dic3Handler
 
     expand_and_select_vocab!(match[:reply], @dictionary1)
     expand_name!(match[:reply], @context[:myname], @context[:usname])
-    { reply: match[:reply], level: match[:level] }
+    { reply: match[:reply], level: calc_reply_level(lev, match[:level]) }
   end
 
   private
