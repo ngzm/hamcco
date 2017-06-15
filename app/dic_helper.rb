@@ -55,4 +55,12 @@ module DicHelper
     vstring.gsub!(/%<myname>/, myname)
     vstring.gsub!(/%<usname>/, usname)
   end
+
+  # calculate level no for reply
+  def calc_reply_level(lev, newlv)
+      feel = lev + (newlv - 50) / rand(1..3)
+      feel = 1 if feel < 1
+      feel = 100 if feel > 100
+      feel
+  end
 end
