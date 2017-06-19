@@ -1,0 +1,14 @@
+version: '3.2'
+services:
+  hamapp:
+    build: ./hamapp
+    volumes:
+      - ./hamapp/log:/var/log/hamcco
+    env_file:
+      - ./userlocal.env
+  hamweb:
+    build: ./hamweb
+    ports:
+      - "80:80"
+    links:
+      - hamapp:app
