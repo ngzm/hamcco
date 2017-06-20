@@ -3,6 +3,7 @@
 /log
 /userlocal.env
 /production/userlocal.env
+/production/hamapp/hamcco
 
 # bundler
 /vendor
