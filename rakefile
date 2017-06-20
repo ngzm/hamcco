@@ -1,81 +1,90 @@
-desc 'generate production environmets for deploy'
-task :production => [:npm_build, :cp_production] do
-  puts '--- production ---'
-end
+namespace :production do
+  SERVER_DISTDIR = './production/hamapp/hamcco/'
+  CLIENT_DISTDIR = './production/hamapp/hamcco/app/public'
 
-desc 'Build client app by "npm run build"'
-task :npm_build do
-  puts '--- npm_build start ---'
-  Dir.chdir('./client') do
-    `npm run build`
-    unless ($?.exitstatus).zero?
-      puts 'Failed at npm run build'
-      next
+  # 製品版環境をリリースする
+  desc 'Release all production modules'
+  task :default => [:build_client, :export] do
+    puts '--- release all production modules finished ---'
+  end
+
+  # 製品版クライアントアプリをビルドする
+  desc 'Build client app with "npm run build'
+  task :build_client do
+    puts '--- build_client start ---'
+    Dir.chdir('./client') do
+      `npm run build`
+      unless ($?.exitstatus).zero?
+        puts 'Failed at npm run build'
+        next
+      end
     end
+    puts '--- build_client finished ---'
   end
-  puts '--- npm_build finished ---'
-end
 
-desc 'copy production files"'
-task :cp_production => [:cp_server_files, :cp_client_files] do
-  puts '--- cp_production ---'
-end
+  # production 配下に製品版実行環境一式をエクスポートする
+  desc 'Export all production modules'
+  task :export => [:export_server, :export_client] do
+    puts '--- export finished ---'
+  end
 
-SERVER_DISTDIR = './production/hamapp/hamcco'
-desc 'copy server files to production"'
-task :cp_server_files => [:clear_server_files] do
-  puts '--- cp_server_files ---'
-  FileUtils.mkdir_p(SERVER_DISTDIR) unless FileTest.exist?(SERVER_DISTDIR)
-  src_path = './'
-  exclude_dirs = ['.', '..', '.DS_Store', '.bundle', '.git', \
-                  '.gitignore', '.rubocop.yml', '.rubocop_todo.yml', \
-                  'client', 'log', 'production', 'vendor']
-  Dir::entries(src_path).each do |f|
-    unless exclude_dirs.include?(f)
-      src = src_path + f
-      puts "src = #{src}"
-      FileUtils.cp_r src, SERVER_DISTDIR
+  # production 配下に製品版サーバ環境をエクスポートする
+  directory SERVER_DISTDIR
+  desc 'Export server modules to production'
+  task :export_server => [:clean_server, SERVER_DISTDIR] do
+    puts '--- export_server ---'
+    src_path = './'
+    exclude_dirs = ['.', '..', '.DS_Store', '.bundle', '.git', \
+                    '.gitignore', '.rubocop.yml', '.rubocop_todo.yml', \
+                    'client', 'log', 'production', 'vendor']
+    Dir::entries(src_path).each do |f|
+      unless exclude_dirs.include?(f)
+        src = src_path + f
+        puts "src = #{src}"
+        FileUtils.cp_r src, SERVER_DISTDIR
+      end
     end
+    puts '--- export_server finished ---'
   end
-  puts '--- cp_server_files finished ---'
-end
 
-CLIENT_DISTDIR = './production/hamapp/hamcco/app/public'
-desc 'copy client files to production"'
-task :cp_client_files => [:clear_client_files] do
-  puts '--- cp_client_files ---'
-  FileUtils.mkdir_p(CLIENT_DISTDIR) unless FileTest.exist?(CLIENT_DISTDIR)
-  src_path = './client/build/'
-  exclude_dirs = ['.', '..']
-
-  Dir::entries(src_path).each do |f|
-    unless exclude_dirs.include?(f)
-      src = src_path + f
-
-      puts "src = #{src}"
-
-      FileUtils.cp_r src, CLIENT_DISTDIR
+  # production 配下に製品版クライアント環境をエクスポートする
+  directory CLIENT_DISTDIR
+  desc 'Export client modules to production'
+  task :export_client => [:clean_client, CLIENT_DISTDIR] do
+    puts '--- export_client ---'
+    src_path = './client/build/'
+    exclude_dirs = ['.', '..']
+    Dir::entries(src_path).each do |f|
+      unless exclude_dirs.include?(f)
+        src = src_path + f
+        puts "src = #{src}"
+        FileUtils.cp_r src, CLIENT_DISTDIR
+      end
     end
+    puts '--- export_client finished ---'
   end
-  puts '--- cp_client_files finished ---'
-end
 
-desc 'clear production files"'
-task :clear_production => [:clear_client_files, :clear_server_files] do
-  puts '--- clear_production ---'
-end
-desc 'clear serer files on production'
-task :clear_server_files do
-  puts '--- clear_server_files ---'
-  FileUtils.rm_r(SERVER_DISTDIR) if FileTest.exist?(SERVER_DISTDIR)
-  puts '--- clear_server_files finished---'
-end
-
-desc 'clear client files on production'
-task :clear_client_files do
-  puts '--- clear_client_files ---'
-  if FileTest.exist?(CLIENT_DISTDIR) || FileTest.symlink?(CLIENT_DISTDIR)
-    FileUtils.rm_r(CLIENT_DISTDIR)
+  # production 配下の製品版モジュールを全部消去する
+  desc 'Clean all exportd files"'
+  task :clean => [:clean_client, :clean_server] do
+    puts '--- clean_production finished ---'
   end
-  puts '--- clear_client_files finished---'
+
+  # production 配下の製品版サーバモジュールを全部消去する
+  desc 'Clean serer modules under production'
+  task :clean_server do
+    puts '--- clean_server ---'
+    FileUtils.rm_r(SERVER_DISTDIR) if FileTest.exist?(SERVER_DISTDIR)
+    puts '--- clean_server finished---'
+  end
+
+  # production 配下の製品版クライアントモジュールを全部消去する
+  desc 'Clean client modules under production'
+  task :clean_client do
+    puts '--- clean_client ---'
+    if FileTest.exist?(CLIENT_DISTDIR) || FileTest.symlink?(CLIENT_DISTDIR)
+      FileUtils.rm_r(CLIENT_DISTDIR)
+    end
+    puts '--- clean_client finished---'
+  end
 end
