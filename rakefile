@@ -1,0 +1,81 @@
+desc 'generate production environmets for deploy'
+task :production => [:npm_build, :cp_production] do
+  puts '--- production ---'
+end
+
+desc 'Build client app by "npm run build"'
+task :npm_build do
+  puts '--- npm_build start ---'
+  Dir.chdir('./client') do
+    `npm run build`
+    unless ($?.exitstatus).zero?
+      puts 'Failed at npm run build'
+      next
+    end
+  end
+  puts '--- npm_build finished ---'
+end
+
+desc 'copy production files"'
+task :cp_production => [:cp_server_files, :cp_client_files] do
+  puts '--- cp_production ---'
+end
+
+SERVER_DISTDIR = './production/hamapp/hamcco'
+desc 'copy server files to production"'
+task :cp_server_files => [:clear_server_files] do
+  puts '--- cp_server_files ---'
+  FileUtils.mkdir_p(SERVER_DISTDIR) unless FileTest.exist?(SERVER_DISTDIR)
+  src_path = './'
+  exclude_dirs = ['.', '..', '.DS_Store', '.bundle', '.git', \
+                  '.gitignore', '.rubocop.yml', '.rubocop_todo.yml', \
+                  'client', 'log', 'production', 'vendor']
+  Dir::entries(src_path).each do |f|
+    unless exclude_dirs.include?(f)
+      src = src_path + f
+      puts "src = #{src}"
+      FileUtils.cp_r src, SERVER_DISTDIR
+    end
+  end
+  puts '--- cp_server_files finished ---'
+end
+
+CLIENT_DISTDIR = './production/hamapp/hamcco/app/public'
+desc 'copy client files to production"'
+task :cp_client_files => [:clear_client_files] do
+  puts '--- cp_client_files ---'
+  FileUtils.mkdir_p(CLIENT_DISTDIR) unless FileTest.exist?(CLIENT_DISTDIR)
+  src_path = './client/build/'
+  exclude_dirs = ['.', '..']
+
+  Dir::entries(src_path).each do |f|
+    unless exclude_dirs.include?(f)
+      src = src_path + f
+
+      puts "src = #{src}"
+
+      FileUtils.cp_r src, CLIENT_DISTDIR
+    end
+  end
+  puts '--- cp_client_files finished ---'
+end
+
+desc 'clear production files"'
+task :clear_production => [:clear_client_files, :clear_server_files] do
+  puts '--- clear_production ---'
+end
+desc 'clear serer files on production'
+task :clear_server_files do
+  puts '--- clear_server_files ---'
+  FileUtils.rm_r(SERVER_DISTDIR) if FileTest.exist?(SERVER_DISTDIR)
+  puts '--- clear_server_files finished---'
+end
+
+desc 'clear client files on production'
+task :clear_client_files do
+  puts '--- clear_client_files ---'
+  if FileTest.exist?(CLIENT_DISTDIR) || FileTest.symlink?(CLIENT_DISTDIR)
+    FileUtils.rm_r(CLIENT_DISTDIR)
+  end
+  puts '--- clear_client_files finished---'
+end
