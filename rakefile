@@ -1,15 +1,18 @@
+desc 'Alias of "rake production all"'
+task :product => ['production:all']
+
 namespace :production do
   SERVER_DISTDIR = './production/hamapp/hamcco/'
   CLIENT_DISTDIR = './production/hamapp/hamcco/app/public'
 
   # 製品版環境をリリースする
   desc 'Release all production modules'
-  task :default => [:build_client, :export] do
+  task :all => [:build_client, :export] do
     puts '--- release all production modules finished ---'
   end
 
   # 製品版クライアントアプリをビルドする
-  desc 'Build client app with "npm run build'
+  desc 'Build client app with "npm run build"'
   task :build_client do
     puts '--- build_client start ---'
     Dir.chdir('./client') do
@@ -65,7 +68,7 @@ namespace :production do
   end
 
   # production 配下の製品版モジュールを全部消去する
-  desc 'Clean all exportd files"'
+  desc 'Clean all exportd files'
   task :clean => [:clean_client, :clean_server] do
     puts '--- clean_production finished ---'
   end
@@ -75,7 +78,7 @@ namespace :production do
   task :clean_server do
     puts '--- clean_server ---'
     FileUtils.rm_r(SERVER_DISTDIR) if FileTest.exist?(SERVER_DISTDIR)
-    puts '--- clean_server finished---'
+    puts '--- clean_server finished ---'
   end
 
   # production 配下の製品版クライアントモジュールを全部消去する
@@ -85,6 +88,6 @@ namespace :production do
     if FileTest.exist?(CLIENT_DISTDIR) || FileTest.symlink?(CLIENT_DISTDIR)
       FileUtils.rm_r(CLIENT_DISTDIR)
     end
-    puts '--- clean_client finished---'
+    puts '--- clean_client finished ---'
   end
 end
