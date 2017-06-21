@@ -5,7 +5,7 @@ services:
     volumes:
       - ./hamapp/log:/var/log/hamcco
     env_file:
-      - ./hamapp/hamcco/userlocal.env
+      - ./userlocal.env
   hamweb:
     build: ./hamweb
     ports:

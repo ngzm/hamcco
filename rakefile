@@ -4,6 +4,7 @@ task :product => ['production:all']
 namespace :production do
   SERVER_DISTDIR = './production/hamapp/hamcco/'
   CLIENT_DISTDIR = './production/hamapp/hamcco/app/public'
+  USERLOCAL_ENVF = './production/userlocal.env'
 
   # 製品版環境をリリースする
   desc 'Release all production modules'
@@ -34,7 +35,7 @@ namespace :production do
   # production 配下に製品版サーバ環境をエクスポートする
   directory SERVER_DISTDIR
   desc 'Export server modules to production'
-  task :export_server => [:clean_server, SERVER_DISTDIR] do
+  task :export_server => [:clean_server, SERVER_DISTDIR, USERLOCAL_ENVF] do
     puts '--- export_server ---'
     src_path = './'
     exclude_dirs = ['.', '..', '.DS_Store', '.bundle', '.git', \
@@ -65,6 +66,15 @@ namespace :production do
       end
     end
     puts '--- export_client finished ---'
+  end
+
+  # production/userlocal.env が存在しない場合は適当に作成する
+  file USERLOCAL_ENVF do
+    puts "--- create #{USERLOCAL_ENVF} ---"
+    open(USERLOCAL_ENVF, "w") do |f|
+      f << 'DUMMY_USERLOCAL_APP_KEY=dummy'
+    end
+    puts "--- create #{USERLOCAL_ENVF} finished ---"
   end
 
   # production 配下の製品版モジュールを全部消去する
