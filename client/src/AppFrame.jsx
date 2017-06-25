@@ -34,7 +34,7 @@ function AppHeader() {
 function AppFooter() {
   return (
     <footer>
-      <small>French Connection</small>
+      <small>Beauty FRANCE</small>
     </footer>
   );
 }
