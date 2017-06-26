@@ -24,7 +24,6 @@ class UserLocal
 
   def post_chat(message)
     res = Faraday.post(CHAT_URL, 'key' => APP_KEY, 'message' => message)
-    p "UserLocal CHAT: res.status = #{res.status}, res.body #{res.body}" if DEBUG
     raise UserlocalApiException, 'ERROR occured at UserLocal API' \
       unless res.status == 200
     res
@@ -34,7 +33,6 @@ class UserLocal
     char = %w[cat dog roujin].sample
     post = { 'key' => APP_KEY, 'message' => message, 'character_type' => char }
     res  = Faraday.post(CHAR_URL, post)
-    p "UserLocal CHARACTER: res.status = #{res.status}, res.body #{res.body}" if DEBUG
     raise UserlocalApiException, 'ERROR occured at UserLocal API' \
       unless res.status == 200
     res
