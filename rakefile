@@ -1,15 +1,19 @@
+desc 'Alias of "rake production all"'
+task :product => ['production:all']
+
 namespace :production do
   SERVER_DISTDIR = './production/hamapp/hamcco/'
   CLIENT_DISTDIR = './production/hamapp/hamcco/app/public'
+  USERLOCAL_ENVF = './production/userlocal.env'
 
   # 製品版環境をリリースする
   desc 'Release all production modules'
-  task :default => [:build_client, :export] do
+  task :all => [:build_client, :export] do
     puts '--- release all production modules finished ---'
   end
 
   # 製品版クライアントアプリをビルドする
-  desc 'Build client app with "npm run build'
+  desc 'Build client app with "npm run build"'
   task :build_client do
     puts '--- build_client start ---'
     Dir.chdir('./client') do
@@ -31,7 +35,7 @@ namespace :production do
   # production 配下に製品版サーバ環境をエクスポートする
   directory SERVER_DISTDIR
   desc 'Export server modules to production'
-  task :export_server => [:clean_server, SERVER_DISTDIR] do
+  task :export_server => [:clean_server, SERVER_DISTDIR, USERLOCAL_ENVF] do
     puts '--- export_server ---'
     src_path = './'
     exclude_dirs = ['.', '..', '.DS_Store', '.bundle', '.git', \
@@ -64,8 +68,17 @@ namespace :production do
     puts '--- export_client finished ---'
   end
 
+  # production/userlocal.env が存在しない場合は適当に作成する
+  file USERLOCAL_ENVF do
+    puts "--- create #{USERLOCAL_ENVF} ---"
+    open(USERLOCAL_ENVF, "w") do |f|
+      f << 'DUMMY_USERLOCAL_APP_KEY=dummy'
+    end
+    puts "--- create #{USERLOCAL_ENVF} finished ---"
+  end
+
   # production 配下の製品版モジュールを全部消去する
-  desc 'Clean all exportd files"'
+  desc 'Clean all exportd files'
   task :clean => [:clean_client, :clean_server] do
     puts '--- clean_production finished ---'
   end
@@ -75,7 +88,7 @@ namespace :production do
   task :clean_server do
     puts '--- clean_server ---'
     FileUtils.rm_r(SERVER_DISTDIR) if FileTest.exist?(SERVER_DISTDIR)
-    puts '--- clean_server finished---'
+    puts '--- clean_server finished ---'
   end
 
   # production 配下の製品版クライアントモジュールを全部消去する
@@ -85,6 +98,6 @@ namespace :production do
     if FileTest.exist?(CLIENT_DISTDIR) || FileTest.symlink?(CLIENT_DISTDIR)
       FileUtils.rm_r(CLIENT_DISTDIR)
     end
-    puts '--- clean_client finished---'
+    puts '--- clean_client finished ---'
   end
 end

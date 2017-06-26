@@ -3,9 +3,6 @@ require 'sinatra/base'
 require 'ham_helper'
 require 'ham_exception'
 
-## Debug Print Flag
-DEBUG = true
-
 # HamccoControll Class
 class HamController < Sinatra::Base
   # Helper module
@@ -49,21 +46,21 @@ class HamController < Sinatra::Base
   # Error handlers
   error BadRequestException do
     e = env['sinatra.error']
-    p "BadRequestException!!! #{e}" if DEBUG
+    p "BadRequestException!!! #{e}"
     status 400
     e.message
   end
 
   error UserlocalApiException do
     e = env['sinatra.error']
-    p "UserlocalApiException!!! #{e}" if DEBUG
+    p "UserlocalApiException!!! #{e}"
     status 502
     e.message
   end
 
   error do
     e = env['sinatra.error']
-    p "RuntimeException!!! #{e}" if DEBUG
+    p "RuntimeException!!! #{e}"
     status 500
     e.message
   end

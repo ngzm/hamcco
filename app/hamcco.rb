@@ -48,12 +48,9 @@ class HamccoFactory
 
   def initialize
     super
-    @hamcco = Hamcco.new
-
-    ## こっからはデバッグ用
-    return unless DEBUG
     puts '---------------------------'
     puts 'Initialize Hamcco Instance'
     puts '---------------------------'
+    @hamcco = Hamcco.new
   end
 end
