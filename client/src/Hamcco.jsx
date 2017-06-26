@@ -12,7 +12,7 @@ class Hamcco extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      feel: 80,
+      feel: 50,
       message: 'Hi! user',
       count: 0,
     };
