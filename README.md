@@ -1,44 +1,40 @@
-# 人工無脳 ハムっこ
+# 人工無脳 ハムっこ -  Hamcco Chat Bot
 
-## Hamcco Chat Bot
+## How to buid and export hamcco application for production.
 
-### Requirements on your server.
-
-Hamcco is require docker and docker-compose on your server.
-
-#### How to buid and export hamcco app.
-
-please run rake task like this.
+Please run rake task like this.
 
 ```shell
 $ rake product
 ```
 
-Then, you can see "production" directory, where expoted hamcco's all release files. 
+Then, you can see "production" directory, where expoted hamcco's all production modules. 
 
-#### Deploy hamcco
+## Deploy hamcco
 
-Please copy "production" directory to your server where must be installed docker and docker-compose.
+Please copy "production" directory to your server.
 
-#### Build and execute hamcco application
+Hamcco is required docker and docker-compose on your server.
 
-you can build the hamcco docker containers by using docker-compose, like this.
+## Build and execute hamcco application
+
+You can build hamcco's docker images with docker-compose.
 
 ```shell
 # docker-compose build
 ```
 
-It will make two docker images. One of those is a nginx, and the other is a hamcco's application image that contains unicorn and sinatra based on the ruby image.
+Will make two docker images. One of those is a nginx, and the other is a hamcco's application image that contains unicorn and sinatra based on ruby image.
 
-Then, you can execute nginx and hamcco docker containers.
+Next, you can execute nginx and hamcco docker containers, like this.
 
 ```shell
 # docker-compose up -d 
 ```
 
-The -d option is meant that containers runs background.
+The -d option means containers run background.
 
-#### Stop and Restart hamcco application
+## Stop and Restart hamcco application
 
 Stop hamcco and nginx containers.
 
