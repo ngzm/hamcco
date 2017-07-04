@@ -2,7 +2,7 @@
 
 ## How to buid and export hamcco application for production.
 
-Please run "rake task" as follows.
+Please run rake task as follows.
 
 ```shell
 $ rake product
@@ -18,13 +18,13 @@ Note. Docker and docker-compose must be installed on your server.
 
 ## Build and execute hamcco application
 
-You can build docker images of hamcco using docker-compose.
+You can build docker images of hamcco by using docker-compose.
 
 ```shell
 # docker-compose build
 ```
 
-It will make two docker images. One of those is a nginx, and the other is a hamcco's application image that contains unicorn and sinatra based on ruby image.
+It will build two docker images. One of those is a nginx, and the other is a hamcco's application image that contains unicorn and sinatra based on ruby image.
 
 Next, you can execute nginx and hamcco docker containers, like this.
 
