@@ -11,4 +11,6 @@ services:
     ports:
       - "80:80"
     links:
-      - hamapp:app
+      - hamapp:hamapp
+    volumes:
+      - ./hamweb/log:/var/log/nginx
