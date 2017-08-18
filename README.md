@@ -1,5 +1,11 @@
 # 人工無脳 ハムっこ -  Hamcco Chat Bot
 
+## Demo Page
+
+Please try.
+
+[hamcco demo page](http://hamcco.free-game.space) "hamcco demo")
+
 ## How to buid and export hamcco application for production.
 
 Please run rake task as follows.
