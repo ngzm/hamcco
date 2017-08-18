@@ -2,7 +2,7 @@
 
 ## Demo Page
 
-Please try -->  <a href="http://hamcco.free-game.space" target="_blank">hamcco demo page</a>
+Please try, Sorry but this is Japanese only -->  <a href="http://hamcco.free-game.space">hamcco demo page</a>
 
 ## How to buid and export hamcco application for production.
 
