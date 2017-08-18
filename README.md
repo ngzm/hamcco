@@ -2,7 +2,7 @@
 
 ## Demo Page
 
-Please try. [hamcco demo page](http://hamcco.free-game.space) "hamcco demo"){:target="_blank"}
+Please try -->  <a href="http://hamcco.free-game.space" target="_blank">hamcco demo page</a>
 
 ## How to buid and export hamcco application for production.
 
