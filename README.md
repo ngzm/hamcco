@@ -2,9 +2,7 @@
 
 ## Demo Page
 
-Please try.
-
-[hamcco demo page](http://hamcco.free-game.space) "hamcco demo")
+Please try. [hamcco demo page](http://hamcco.free-game.space) "hamcco demo"){:target="_blank"}
 
 ## How to buid and export hamcco application for production.
 
