@@ -1,4 +1,4 @@
-FROM ruby:latest
+FROM ruby:2.5
 MAINTAINER ngzm<nk.ngzm@gmail.com>
 ADD ./hamcco /usr/src/app/
 RUN cd /usr/src/app && bundle install
